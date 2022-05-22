@@ -29,7 +29,7 @@ class personal(BaseModel):
     sex_M: float
 
 class location(BaseModel):
-    poscode: float
+    postcode: float
     venue: str
     hour: int
     day: str 
