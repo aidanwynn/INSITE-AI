@@ -116,8 +116,9 @@ def predictPers(person: personal):
         ]
     )
     # print(data_point)
+    print("Performing AI predictions.")
     prediction = personal_model.predict_proba(data_point).tolist()[0][1]
-    
+    print("Predictions complete.")
     return {"PredictionPers": round(prediction*100, 2)}   
 
 @app.post("/predict/location")
@@ -130,14 +131,14 @@ def predictLoc(location: location):
     low = currentTime
     up = low + 5
     row = values[low:up].flatten()
-    print(row)
+    print("Performing AI predictions.")
     # make a prediction
     predicted_cases = location_model.predict(np.asarray([row]))[0]
     change = predicted_cases - values[up-1]
-    print(change)
+    # print(change)
     
     predicted_risk = popularTimesRisk(location.hour, location.day, location.venue, 'UOW_popularTimes.json')
-    
+    print("Predictions complete.")
     return {"PredictionCases": round(predicted_cases, 0), 
             "Change": round(float(change), 0),
             "PredictionRisk": round(predicted_risk*100, 2)}  
